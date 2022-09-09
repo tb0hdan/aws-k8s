@@ -12,7 +12,7 @@ I, however, find it more comfortable to have testable and maintainable Go code i
 
 ## Installation
 
-`go get github.com/tb0hdan/aws-k8s`
+`go install github.com/tb0hdan/aws-k8s/cmd/aws-k8s@latest`
 
 ## Initial setup
 
