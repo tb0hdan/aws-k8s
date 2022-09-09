@@ -1,4 +1,4 @@
-module aws-k8s
+module github.com/tb0hdan/aws-k8s
 
 go 1.18
 
