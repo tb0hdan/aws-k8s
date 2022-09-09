@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"aws-k8s/pkg/utils"
+	"github.com/tb0hdan/aws-k8s/pkg/utils"
 
 	"github.com/pkg/errors"
 	"gopkg.in/ini.v1"

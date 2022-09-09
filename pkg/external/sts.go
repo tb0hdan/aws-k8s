@@ -4,7 +4,7 @@ import (
 	"context"
 	"os/user"
 
-	"aws-k8s/pkg/utils"
+	"github.com/tb0hdan/aws-k8s/pkg/utils"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"

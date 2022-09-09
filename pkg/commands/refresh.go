@@ -3,9 +3,9 @@ package commands
 import (
 	"context"
 
-	"aws-k8s/pkg/auth"
-	"aws-k8s/pkg/external"
-	"aws-k8s/pkg/utils"
+	"github.com/tb0hdan/aws-k8s/pkg/auth"
+	"github.com/tb0hdan/aws-k8s/pkg/external"
+	"github.com/tb0hdan/aws-k8s/pkg/utils"
 
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/pkg/errors"
