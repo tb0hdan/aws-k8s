@@ -19,11 +19,6 @@ type STSClient struct {
 }
 
 func (a *STSClient) Get() *STSClient {
-	/*
-		absolutePath, err := utils.Expand("~/.aws/aws-k8s.ini", a.User)
-		if err != nil {
-			log.Fatalf("Could not expand path: %+v\n", err)
-		} */
 	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.ini")
 	iniCfg, err := ini.Load(absolutePath)
 	if err != nil {
