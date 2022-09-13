@@ -5,6 +5,7 @@ import (
 
 	"github.com/alecthomas/kong"
 	"github.com/tb0hdan/aws-k8s/pkg/auth"
+	"github.com/tb0hdan/aws-k8s/pkg/config"
 	"github.com/tb0hdan/aws-k8s/pkg/external"
 	"github.com/tb0hdan/aws-k8s/pkg/utils"
 
@@ -17,7 +18,9 @@ type RefreshCmd struct {
 }
 
 func (r *RefreshCmd) Run(ctx *CLIContext) error {
-	stsClient := &external.STSClient{User: ctx.User}
+	appConfig := config.New("~/.aws/aws-k8s.ini")
+	appConfig.Load()
+	stsClient := &external.STSClient{User: ctx.User, AppConfig: appConfig}
 	client := stsClient.Get()
 	tokenInfo := &sts.GetSessionTokenInput{
 		DurationSeconds: utils.Int32Ptr(3600),

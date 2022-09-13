@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"os"
 	"os/user"
 
 	"github.com/alecthomas/kong"
@@ -22,6 +23,10 @@ func (a *AWSCommand) AddCommand(name, help, group string, cmd interface{}, tags 
 }
 
 func (a *AWSCommand) Parse(cliStruct interface{}) *kong.Context {
+	// Show help by default
+	if len(os.Args) == 1 {
+		os.Args = append(os.Args, "-h")
+	}
 	return kong.Parse(cliStruct, a.Commands...)
 }
 

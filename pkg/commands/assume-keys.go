@@ -34,7 +34,7 @@ func (p *AssumeKeysCmd) Run(ctx *CLIContext) error {
 		SessionToken = validCredentials.SessionToken
 
 	} else {
-		return fmt.Errorf("credentials invalid, please run `aws-k8s refresh --token=123456`")
+		return fmt.Errorf("credentials invalid, please run `aws-k8s assume --token=123456`")
 	}
 	fmt.Printf("export AWS_ACCESS_KEY_ID=%s; export AWS_SECRET_ACCESS_KEY=%s; export AWS_SESSION_TOKEN=%s",
 		AccessKeyId,

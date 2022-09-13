@@ -1,10 +1,12 @@
 package auth
 
 import (
+	"context"
 	"encoding/json"
 	"os"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -51,6 +53,17 @@ func (cc *CredentialsCache) Valid() bool {
 		return true
 	}
 	return false
+}
+
+func (cc *CredentialsCache) Retrieve(ctx context.Context) (aws.Credentials, error) {
+	return aws.Credentials{
+		AccessKeyID:     cc.AccessKeyId,
+		SecretAccessKey: cc.SecretAccessKey,
+		SessionToken:    cc.SessionToken,
+		Source:          "AWS K8S Cache",
+		CanExpire:       true,
+		Expires:         cc.Expiration,
+	}, nil
 }
 
 func NewCredentials(cfgPath string) *CredentialsCache {

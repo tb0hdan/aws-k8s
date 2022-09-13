@@ -16,6 +16,8 @@ github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.15 h1:noAhOo2mMDyYhTx99a
 github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.15/go.mod h1:kjJ4CyD9M3Wq88GYg3IPfj67Rs0Uvz8aXK7MJ8BvE4I=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.3.22 h1:nF+E8HfYpOMw6M5oA9efB602VC00IHNQnB5CmFvZPvA=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.3.22/go.mod h1:tltHVGy977LrSOgRR5aV9+miyno/Gul/uJNPKS7FzP4=
+github.com/aws/aws-sdk-go-v2/service/eks v1.21.11 h1:i3tEE+cLmu/MR5VPjPtNZucFJKjklxxMstJveGwxwpU=
+github.com/aws/aws-sdk-go-v2/service/eks v1.21.11/go.mod h1:uQKobwLPAvlksViYM6CGnpmfhjca+LjHAhtfSdHrKVg=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.15 h1:xlf0J6DUgAj/ocvKQxCmad8Bu1lJuRbt5Wu+4G1xw1g=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.15/go.mod h1:ZVJ7ejRl4+tkWMuCwjXoy0jd8fF5u3RCyWjSVjUIvQE=
 github.com/aws/aws-sdk-go-v2/service/sso v1.11.21 h1:7jUFr+7F4MzIjCZzy7ygRtXFQcQ0kAbT0gUvtUeAdyU=
@@ -31,6 +33,7 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.5.8 h1:e6P7q2lk1O+qJJb4BtCQXlK8vWEO8V1ZeuEdJNOqZyg=
 github.com/google/go-cmp v0.5.8/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg=
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1/go.mod h1:L3OGu8Wl2/fWfCI6z80xFu9LTZmf1ZRjMHUOPmWr69U=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=

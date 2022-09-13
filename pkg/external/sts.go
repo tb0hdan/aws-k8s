@@ -4,14 +4,14 @@ import (
 	"context"
 	"os/user"
 
-	"github.com/alecthomas/kong"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	log "github.com/sirupsen/logrus"
-	"gopkg.in/ini.v1"
+	appConfig "github.com/tb0hdan/aws-k8s/pkg/config"
 )
 
 type STSClient struct {
+	AppConfig  *appConfig.Application
 	Client     *sts.Client
 	User       *user.User
 	Role       string
@@ -19,38 +19,28 @@ type STSClient struct {
 }
 
 func (a *STSClient) Get() *STSClient {
-	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.ini")
-	iniCfg, err := ini.Load(absolutePath)
-	if err != nil {
-		log.Fatalf("Could not read default config: %+v\n", err)
+	region := a.AppConfig.GetRegion()
+	if len(region) == 0 {
+		log.Fatal("Config doesn't have region value")
 	}
-	section, err := iniCfg.GetSection("default")
-	if err != nil {
-		log.Fatalf("Config doesn't have default section: %+v\n", err)
-	}
-
-	key, err := section.GetKey("region")
-	if err != nil {
-		log.Fatalf("Config doesn't have region value: %+v\n", err)
-	}
-	role, err := section.GetKey("role_arn")
-	if err != nil {
-		log.Fatalf("Config doesn't have role_arn value: %+v\n", err)
+	roleARN := a.AppConfig.GetRoleARN()
+	if len(roleARN) == 0 {
+		log.Fatal("Config doesn't have role_arn value")
 	}
 
-	assumeRole, err := section.GetKey("assume_arn")
-	if err != nil {
-		log.Fatalf("Config doesn't have assume_arn value: %+v\n", err)
+	assumeARN := a.AppConfig.GetAssumeARN()
+	if len(assumeARN) == 0 {
+		log.Fatal("Config doesn't have assume_arn value")
 	}
 
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(key.Value()))
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
 	}
 
 	return &STSClient{
 		Client:     sts.NewFromConfig(cfg),
-		Role:       role.Value(),
-		AssumeRole: assumeRole.Value(),
+		Role:       roleARN,
+		AssumeRole: assumeARN,
 	}
 }
