@@ -3,12 +3,12 @@ package commands
 import (
 	"context"
 
+	"github.com/alecthomas/kong"
 	"github.com/tb0hdan/aws-k8s/pkg/auth"
 	"github.com/tb0hdan/aws-k8s/pkg/external"
 	"github.com/tb0hdan/aws-k8s/pkg/utils"
 
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -29,11 +29,7 @@ func (r *RefreshCmd) Run(ctx *CLIContext) error {
 		log.Fatalf("GetSessionToken failed with: %+v\n", err)
 	}
 
-	absolutePath, err := utils.Expand("~/.aws/aws-k8s.json", ctx.User)
-	if err != nil {
-		return errors.Wrapf(err, "Could not expand path")
-	}
-
+	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.json")
 	credentials := auth.NewCredentials(absolutePath)
 	err = credentials.Save(&auth.CredentialsCache{
 		AccessKeyId:     *output.Credentials.AccessKeyId,

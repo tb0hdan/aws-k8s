@@ -5,10 +5,9 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/tb0hdan/aws-k8s/pkg/auth"
-	"github.com/tb0hdan/aws-k8s/pkg/utils"
-
+	"github.com/alecthomas/kong"
 	"github.com/pkg/errors"
+	"github.com/tb0hdan/aws-k8s/pkg/auth"
 )
 
 type WrapCmd struct {
@@ -22,10 +21,7 @@ func (w *WrapCmd) Run(ctx *CLIContext) error {
 		SessionToken    string
 	)
 
-	absolutePath, err := utils.Expand("~/.aws/aws-k8s-assume.json", ctx.User)
-	if err != nil {
-		return errors.Wrapf(err, "Could not expand path")
-	}
+	absolutePath := kong.ExpandPath("~/.aws/aws-k8s-assume.json")
 	credentials := auth.NewCredentials(absolutePath)
 	if credentials.Valid() {
 		validCredentials, err := credentials.Load()

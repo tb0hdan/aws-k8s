@@ -3,9 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"github.com/tb0hdan/aws-k8s/pkg/utils"
-
-	"github.com/pkg/errors"
+	"github.com/alecthomas/kong"
 	"gopkg.in/ini.v1"
 )
 
@@ -18,11 +16,7 @@ func (c *ConfigureCmd) Run(ctx *CLIContext) error {
 		RoleARN   string
 		AssumeARN string
 	)
-	// Expand path before going interactive
-	absolutePath, err := utils.Expand("~/.aws/aws-k8s.ini", ctx.User)
-	if err != nil {
-		return errors.Wrapf(err, "Could not expand path")
-	}
+	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.ini")
 	//
 	fmt.Println("AWS K8S Configuration")
 	fmt.Println("Please type required parameters and press enter")

@@ -4,8 +4,7 @@ import (
 	"context"
 	"os/user"
 
-	"github.com/tb0hdan/aws-k8s/pkg/utils"
-
+	"github.com/alecthomas/kong"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	log "github.com/sirupsen/logrus"
@@ -20,10 +19,12 @@ type STSClient struct {
 }
 
 func (a *STSClient) Get() *STSClient {
-	absolutePath, err := utils.Expand("~/.aws/aws-k8s.ini", a.User)
-	if err != nil {
-		log.Fatalf("Could not expand path: %+v\n", err)
-	}
+	/*
+		absolutePath, err := utils.Expand("~/.aws/aws-k8s.ini", a.User)
+		if err != nil {
+			log.Fatalf("Could not expand path: %+v\n", err)
+		} */
+	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.ini")
 	iniCfg, err := ini.Load(absolutePath)
 	if err != nil {
 		log.Fatalf("Could not read default config: %+v\n", err)

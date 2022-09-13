@@ -3,10 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"github.com/tb0hdan/aws-k8s/pkg/auth"
-	"github.com/tb0hdan/aws-k8s/pkg/utils"
-
+	"github.com/alecthomas/kong"
 	"github.com/pkg/errors"
+	"github.com/tb0hdan/aws-k8s/pkg/auth"
 )
 
 type KeysCmd struct {
@@ -22,11 +21,8 @@ func (p *KeysCmd) Run(ctx *CLIContext) error {
 	if !p.Print {
 		return nil
 	}
-	absolutePath, err := utils.Expand("~/.aws/aws-k8s.json", ctx.User)
-	if err != nil {
-		return errors.Wrapf(err, "Could not expand path")
-	}
 
+	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.json")
 	credentials := auth.NewCredentials(absolutePath)
 	if credentials.Valid() {
 		validCredentials, err := credentials.Load()
