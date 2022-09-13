@@ -53,6 +53,10 @@ e.g.
 
 `aws-k8s --debug keys --print`
 
+# Creating your custom CLI based on `aws-k8s`
+
+Example: [aws-k8s-cli](https://github.com/tb0hdan/aws-k8s-cli)
+
 # Contributing
 
 - Open PR
