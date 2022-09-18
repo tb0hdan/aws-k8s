@@ -10,6 +10,7 @@ import (
 	appConfig "github.com/tb0hdan/aws-k8s/pkg/config"
 )
 
+// https://github.com/aws/aws-sdk-go-v2/tree/main/service/sts
 type STSClient struct {
 	AppConfig  *appConfig.Application
 	Client     *sts.Client

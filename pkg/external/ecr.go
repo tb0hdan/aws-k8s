@@ -2,18 +2,18 @@ package external
 
 import (
 	"github.com/alecthomas/kong"
-	"github.com/aws/aws-sdk-go-v2/service/eks"
+	"github.com/aws/aws-sdk-go-v2/service/ecr"
 	"github.com/tb0hdan/aws-k8s/pkg/auth"
 	appConfig "github.com/tb0hdan/aws-k8s/pkg/config"
 )
 
-// https://github.com/aws/aws-sdk-go-v2/tree/main/service/eks
-type EKSClient struct {
+// https://github.com/aws/aws-sdk-go-v2/tree/main/service/ecr
+type ECRClient struct {
 	AppConfig *appConfig.Application
-	Client    *eks.Client
+	Client    *ecr.Client
 }
 
-func (e *EKSClient) Get() *EKSClient {
+func (e *ECRClient) Get() *ECRClient {
 	absolutePath := kong.ExpandPath("~/.aws/aws-k8s.json")
 	cache := auth.NewCredentials(absolutePath)
 	loaded, err := cache.Load()
@@ -21,9 +21,9 @@ func (e *EKSClient) Get() *EKSClient {
 		panic(err)
 	}
 
-	client := eks.New(eks.Options{
+	client := ecr.New(ecr.Options{
 		Credentials: loaded,
 		Region:      e.AppConfig.GetRegion(),
 	})
-	return &EKSClient{Client: client}
+	return &ECRClient{Client: client}
 }
